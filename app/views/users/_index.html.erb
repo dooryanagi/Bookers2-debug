@@ -11,7 +11,8 @@
       <tr>
         <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
         <td><%= user.name %></td>
-        <td><%= link_to 'Show', user %></td>
+        <!--_pathを追記-->
+        <td><%= link_to 'Show', user_path %></td>
       </tr>
     <% end %>
   </tbody>

@@ -15,7 +15,9 @@ class BooksController < ApplicationController
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
       @books = Book.all
-      render 'index'
+      # renderは''ではなく:
+      # 異なるコントローラーの可能性もある、挙動確認
+      render :index
     end
   end
 
@@ -28,7 +30,9 @@ class BooksController < ApplicationController
     if @book.update(book_params)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
-      render "edit"
+      # renderは""ではなく:
+      # 異なるコントローラーの可能性もある、挙動確認
+      render :edit
     end
   end
 
@@ -41,6 +45,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title)
+    # permitにbodyも追加
+    params.require(:book).permit(:title, :body)
   end
 end

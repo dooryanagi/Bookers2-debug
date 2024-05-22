@@ -10,15 +10,21 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @book = Book.new
+  # endの追加
+  end
 
   def edit
+    # アクション内容の定義
   end
 
   def update
+    # findが必要
     if @user.update(user_params)
       redirect_to users_path(@user), notice: "You have updated user successfully."
     else
-      render "show"
+      # 異なるコントローラーの可能性もある、挙動確認
+      # ダブルクオーテーションはとりあえずなしでは？？
+      render :show
     end
   end
 
