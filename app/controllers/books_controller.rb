@@ -3,8 +3,10 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     #部分テンプレートで参照するために@userを定義
-    # Userinfoには本を書いた人の情報を出すためidを取得して
-    @user = User.find(params[:id])
+    # Userinfoには本を書いた人の情報を出すためidを取得
+    # これだと本のidがユーザーにも入ってしまう
+    #@ bookはfindで一つに定まっているので、アソシエーションしているモデル同士の表記でuserを特定できる
+    @user = @book.user
   end
 
   def index
@@ -14,7 +16,7 @@ class BooksController < ApplicationController
     # Book.allだから@book.userでは一つに絞ることは出来ない
     # indexの時は自分でよい！
     # @user = @books.user
-    
+
     # 部分テンプレート（form）呼び出しのために定義
     @book = Book.new
   end
@@ -47,9 +49,11 @@ class BooksController < ApplicationController
     end
   end
 
-  def delete
+  # delete→destroy
+  def destroy
     @book = Book.find(params[:id])
-    @book.destoy
+    # destoy→destroy
+    @book.destroy
     redirect_to books_path
   end
 

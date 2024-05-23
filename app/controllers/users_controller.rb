@@ -15,8 +15,11 @@ class UsersController < ApplicationController
 
   def edit
     # アクション内容の定義
-    # user == current_userの設定の追加が必要
     @user = User.find(params[:id])
+    # user == current_userの設定の追加が必要
+    unless @user == current_user
+      redirect_to user_path(current_user)
+    end
   end
 
   def update
@@ -24,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       # 更新したら更新したユーザーの詳細ページに行く
-      # フラッシュメッセージはnoticeでもできる？
+      # フラッシュメッセージはnoticeでもできる？→できるはず？？
       redirect_to user_path(@user.id), notice: "You have updated user successfully."
     else
       # 異なるコントローラーの可能性もある、挙動確認
