@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   #ログインに関わるので最初に持ってくる
   devise_for :users
 
-  root :to =>"homes#top"
+  # root toの書き方の修正
+  root to: 'homes#top'
   get "home/about"=>"homes#about"
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]

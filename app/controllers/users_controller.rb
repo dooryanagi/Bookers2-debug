@@ -15,16 +15,22 @@ class UsersController < ApplicationController
 
   def edit
     # アクション内容の定義
+    # user == current_userの設定の追加が必要
+    @user = User.find(params[:id])
   end
 
   def update
     # findが必要
+    @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to users_path(@user), notice: "You have updated user successfully."
+      # 更新したら更新したユーザーの詳細ページに行く
+      # フラッシュメッセージはnoticeでもできる？
+      redirect_to user_path(@user.id), notice: "You have updated user successfully."
     else
       # 異なるコントローラーの可能性もある、挙動確認
       # ダブルクオーテーションはとりあえずなしでは？？
-      render :show
+      # render先はedit
+      render :edit
     end
   end
 

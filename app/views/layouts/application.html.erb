@@ -2,19 +2,26 @@
 <html>
   <head>
     <title>Bookers2Ver2</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--順番入れ替え（意味ない？→関係ない）-->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!--自身のKitを張りなおす-->
     <script src="https://kit.fontawesome.com/7ae0cf8aaf.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+
   <body>
     <%= render 'layouts/header' %>
       <main>
-        <p id="notice"><%= notice %></p>
+        <!--これはいるのか？-->
+        <!--<p id="notice">%= notice %></p>-->
+
+        <!--他のビューを表示されるところにyieldを記載する必要がある-->
+        <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
   </body>
