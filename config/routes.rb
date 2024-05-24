@@ -8,7 +8,15 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get "home/about"=>"homes#about"
 
-  resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
+  # ネストしたことでparams[:book_id]でbookのidをURLから取得できる
+  # do~endが必要
+  resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
+    # booksに紐づいたルーティングにする
+    # リンクにid情報が不要のためresourceで作成
+    # resourceの時は紐づくモデルは単数形
+    resource :favorite, only: [:create, :destroy]
+  end
+    
   resources :users, only: [:index,:show,:edit,:update]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

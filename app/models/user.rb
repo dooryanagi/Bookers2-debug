@@ -4,10 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  #userはたくさんの本を持っている
-  has_many :books
+  # userはたくさんの本を持っている
+  # userが消えたら本にも消えてもらう
+  has_many :books, dependent: :destroy
   # userはたくさんのいいねを持っている
-  has_many :favorites
+  # userが消えたら本にも消えてもらう
+  has_many :favorites, dependent: :destroy
 
   has_one_attached :profile_image
 

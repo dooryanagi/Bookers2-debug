@@ -19,6 +19,9 @@
         <!--urlは_pathで表記-->
         <td><%= link_to book.title, book_path(book.id) %></td>
         <td><%= book.body %></td>
+        <!--いいねボタンの追加-->
+        <!--destroyになってしまう？？-->
+        <td><%= link_to "♥", book_favorite_path, method: :post %></td>
       </tr>
     <% end %>
   </tbody>
