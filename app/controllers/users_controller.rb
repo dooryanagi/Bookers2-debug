@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     @users = User.all
     # _formの変数定義
     @book = Book.new
-
   # endの追加
   end
 
@@ -45,6 +44,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
+  # アクションの一つ一つに定義しなくても、ここで本人以外ができないように指定することができる
   def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user

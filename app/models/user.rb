@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   #userはたくさんの本を持っている
   has_many :books
+  # userはたくさんのいいねを持っている
+  has_many :favorites
 
   has_one_attached :profile_image
 
