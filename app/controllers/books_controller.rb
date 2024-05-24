@@ -23,6 +23,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    # createでの本人確認は不要？editにも追加？
     @book.user_id = current_user.id
     if @book.save
       redirect_to book_path(@book), notice: "You have created book successfully."
@@ -36,6 +37,11 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    # 本人以外が編集できないように
+    # リダイレクト先は本の一覧
+    unless @book.user_id = current_user.id
+      redirect_to books_path
+
   end
 
   def update

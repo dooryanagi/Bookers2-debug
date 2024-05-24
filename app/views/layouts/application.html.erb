@@ -18,7 +18,8 @@
     <%= render 'layouts/header' %>
       <main>
         <!--これはいるのか？-->
-        <!--<p id="notice">%= notice %></p>-->
+        <!--これがないからフラッシュメッセージが出なかったんだ！修正-->
+        <p id="notice"><%= notice %></p>
 
         <!--他のビューを表示されるところにyieldを記載する必要がある-->
         <%= yield %>
