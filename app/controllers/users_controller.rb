@@ -9,7 +9,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    # _formの変数定義
     @book = Book.new
+
   # endの追加
   end
 

@@ -14,8 +14,9 @@
         <!--_pathを追記-->
         <!--ユーザーの詳細ページに飛ぶ-->
         <!--リンクがおかしい、、、-->
-        <!--各リンクにはid情報が入っている、のでparams[:id]で指定できる？→できない、、、-->
-        <td><%= link_to 'Show', url: user_path(user.id) %></td>
+        <!--各リンクにはid情報が入っている-->
+        <!--urlと記載する必要がなかった-->
+        <td><%= link_to 'Show', user_path(user.id) %></td>
       </tr>
     <% end %>
   </tbody>

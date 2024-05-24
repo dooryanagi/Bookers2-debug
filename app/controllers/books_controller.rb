@@ -39,9 +39,10 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     # 本人以外が編集できないように
     # リダイレクト先は本の一覧
-    unless @book.user_id = current_user.id
+    # なんでんだ？？→＝は代入、＝＝は同一であること
+    unless @book.user_id == current_user.id
       redirect_to books_path
-
+    end
   end
 
   def update
