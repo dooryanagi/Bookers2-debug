@@ -20,8 +20,21 @@
         <td><%= link_to book.title, book_path(book.id) %></td>
         <td><%= book.body %></td>
         <!--いいねボタンの追加-->
+        <!--いいねしているかの分岐を追加-->
         <!--destroyになってしまう？？-->
-        <td><%= link_to "♥", book_favorite_path, method: :post %></td>
+        <!--ここでparams[:book_id]にしてしまうと、URLにbookid情報がないのでエラーになってしまう-->
+        <!--ここのURLの引数は詳細ページと同様の目的→どの本にいいねするかを指定する必要がある→eachで順番に入れている本のid情報があればいいねする対象を指定できる-->
+        <td>
+          <% if book.favorited_by?(current_user) %>
+            <%= link_to book_favorite_path(book.id), method: :delete do %>
+              ♥<%= book.favorites.count %>
+            <% end %>
+          <% else %>
+            <%= link_to book_favorite_path(book.id), method: :post do %>
+              ♡<%= book.favorites.count %>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
