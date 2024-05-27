@@ -51,6 +51,30 @@
           </td>
         </tr>
       </table>
+
+      <div>
+      <!--投稿されたコメントの表示-->
+      <% @book.book_comments.each do |comment| %>
+        <%= image_tag comment.user.get_profile_image, size:"50x50" %>
+        <%= comment.user.name %>
+        <%= comment.comment %>
+        <!--本人の場合のみ削除ボタンが表示されるよう設定-->
+        <% if comment.user == current_user %>
+          <!--パスに引数を指定して本とコメントの両方を特定する必要がある-->
+          <%= link_to "Destroy", book_book_comment_path(comment.book, comment), method: :delete %>
+        <% end %>
+      <% end %>
+      </div>
+
+      <!--コメント投稿欄の追加-->
+      <!--モデルはbookに紐づいたコメントであるため両方指定する必要あり-->
+      <div>
+        <%= form_with model:[@book, @comment] do |f| %>
+          <%= f.text_area :comment, row:'3', placeholder: "Comment here!" %>
+          <%= f.submit "Submit" %>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </div>

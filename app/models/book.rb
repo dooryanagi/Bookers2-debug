@@ -5,6 +5,9 @@ class Book < ApplicationRecord
   # bookはたくさんのいいねを持つ
   # bookが消えたらいいねも消えてもらう
   has_many :favorites, dependent: :destroy
+  # bookはたくさんのコメントを持つ
+  # bookが消えたらコメントも消えてもらう
+  has_many :book_comments, dependent: :destroy
 
   # カンマの後のスペースはどっちでもいい？
   validates :title, presence:true

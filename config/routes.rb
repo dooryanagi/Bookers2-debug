@@ -15,8 +15,10 @@ Rails.application.routes.draw do
     # リンクにid情報が不要のためresourceで作成
     # resourceの時は紐づくモデルは単数形
     resource :favorite, only: [:create, :destroy]
+    # book_comment用のルーティングを追加
+    resources :book_comments, only: [:create, :destroy]
   end
-    
+
   resources :users, only: [:index,:show,:edit,:update]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -8,8 +8,11 @@ class User < ApplicationRecord
   # userが消えたら本にも消えてもらう
   has_many :books, dependent: :destroy
   # userはたくさんのいいねを持っている
-  # userが消えたら本にも消えてもらう
+  # userが消えたらいいねにも消えてもらう
   has_many :favorites, dependent: :destroy
+  # userはたくさんのコメントを持っている
+  # userが消えたらコメントにも消えてもらう
+  has_many :book_comments, dependent: :destroy
 
   has_one_attached :profile_image
 

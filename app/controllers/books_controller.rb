@@ -7,6 +7,8 @@ class BooksController < ApplicationController
     # これだと本のidがユーザーにも入ってしまう
     #@ bookはfindで一つに定まっているので、アソシエーションしているモデル同士の表記でuserを特定できる
     @user = @book.user
+    # コメントを投稿するための変数を定義
+    @comment = BookComment.new
   end
 
   def index
