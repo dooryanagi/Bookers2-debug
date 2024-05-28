@@ -13,6 +13,11 @@ class User < ApplicationRecord
   # userはたくさんのコメントを持っている
   # userが消えたらコメントにも消えてもらう
   has_many :book_comments, dependent: :destroy
+  
+  # userはたくさんのfollowerを持っている
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # userはたくさんのfollowedを持っている
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   has_one_attached :profile_image
 
