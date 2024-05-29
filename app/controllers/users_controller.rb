@@ -38,6 +38,20 @@ class UsersController < ApplicationController
     end
   end
 
+  # フォロワー、フォローしている人の一覧を作成するためのメソッド
+  def follows
+    user = User.find(params[:id])
+    # userモデルで定義したfollowings,この中にはたくさんのfollower_idが入っている
+    @users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:id])
+    # userモデルで定義したfollowers,この中にはたくさんのfollowing_idが入っている
+    @users = user.followers
+  end
+
+
   private
 
   def user_params

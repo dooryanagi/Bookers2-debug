@@ -13,11 +13,23 @@ class User < ApplicationRecord
   # userはたくさんのコメントを持っている
   # userが消えたらコメントにも消えてもらう
   has_many :book_comments, dependent: :destroy
-  
+
+  # ★フォローする側：フォローする人はたくさんのフォローされる人を持っている
   # userはたくさんのfollowerを持っている
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  # userはたくさんのfollowedを持っている
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id, dependent: :destroy
+  # フォローしている人一覧の作成の準備
+  has_many :followings, through: :active_relationships, source: :follower
+
+
+  # ★フォローされる側：フォローされる人はたくさんのフォローしてくれる人を持っている
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
+  # フォローされている人一覧の作成の準備
+  has_many :followers, through: :passive_relationships, source: :following
+
+  # 自分のことはフォローできないようにメソッドを定義
+  def followed_by?(user)
+    passive_relationships.find_by(following_id: user.id).present?
+  end
 
   has_one_attached :profile_image
 

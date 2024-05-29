@@ -11,6 +11,26 @@
       <tr>
         <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
         <td><%= user.name %></td>
+        <!--フォロー数、フォロワー数、フォローをする外すを追加-->
+        <td>
+          フォロー数:<%= user.active_relationships.count %>
+        </td>
+        <td>
+          フォロワー数:<%= user.passive_relationships.count %>
+        </td>
+        <td>
+          <!--本人かどうか→ボタンの表示、フォロー済みか否かでする、外す-->
+          <% if current_user != user %>
+            <% if user.followed_by?(current_user) %>
+              <%= link_to "フォローを外す", user_relationship_path(user.id), method: :delete %>
+            <% else %>
+              <%= link_to "フォローする", user_relationship_path(user.id), method: :post %>
+            <% end %>
+          <% end %>
+        </td>
+
+
+
         <!--_pathを追記-->
         <!--ユーザーの詳細ページに飛ぶ-->
         <!--リンクがおかしい、、、-->

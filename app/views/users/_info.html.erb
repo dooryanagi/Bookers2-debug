@@ -8,10 +8,37 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
+  <!--フォロー情報の追加-->
+  <tr>
+    <th>follows</th>
+    <th>
+      <%= link_to follows_user_path(user) do %>
+        <%= user.active_relationships.count %>
+      <% end %>
+    </th>
+  </tr>
+  <tr>
+    <th>followers</th>
+    <th>
+      <%= link_to followers_user_path(user) do %>
+        <%= user.passive_relationships.count %>
+      <% end %>
+    </th>
+  </tr>
+
 </table>
-　
+
 <div class='row'>
-  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
-    <i class="fas fa-user-cog"></i>
+  <!--本人の場合、編集リンク、本人以外の場合、フォローのリンク-->
+  <% if user == current_user %>
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  <% else %>
+    <% if user.followed_by?(current_user) %>
+      <%= link_to "フォローを外す", user_relationship_path(user.id), method: :delete, class: "btn btn-block btn-info" %>
+    <% else %>
+      <%= link_to "フォローする", user_relationship_path(user.id), method: :post %>
+    <% end %>
   <% end %>
 </div>
