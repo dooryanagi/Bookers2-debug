@@ -30,6 +30,7 @@ class User < ApplicationRecord
   def get_profile_image
     # メソッドの定義の書き方が違うような、、、
     # サイズの引数の定義はここでは？、、、
+    # サイズの引数をどこでも指定できる[width,height]を引数にすることもできるし、今回のように各箇所で大きさを指定することもできる
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
 end
