@@ -21,6 +21,14 @@
         <!--これがないからフラッシュメッセージが出なかったんだ！修正-->
         <p id="notice"><%= notice %></p>
 
+        <!--検索ボックスの呼び出し、変数がないので定義の必要なし-->
+        <div>
+          <!--ルートパスには表示させたくない-->
+          <% unless current_page?(root_path) %>
+            <%= render 'searchs/search' %>
+          <% end %>
+        </div>
+
         <!--他のビューを表示されるところにyieldを記載する必要がある-->
         <%= yield %>
       </main>

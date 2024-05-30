@@ -26,18 +26,11 @@ class User < ApplicationRecord
   # フォローされている人一覧の作成の準備
   has_many :followers, through: :passive_relationships, source: :following
 
-  # 自分のことはフォローできないようにメソッドを定義
-  def followed_by?(user)
-    passive_relationships.find_by(following_id: user.id).present?
-  end
-
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   # inntoroductionに関するバリデーションの追加
   validates :introduction, length: {maximum: 50 }
-
-
 
   def get_profile_image
     # メソッドの定義の書き方が違うような、、、
@@ -45,4 +38,13 @@ class User < ApplicationRecord
     # サイズの引数をどこでも指定できる[width,height]を引数にすることもできるし、今回のように各箇所で大きさを指定することもできる
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
+  
+  # 自分のことはフォローできないようにメソッドを定義
+  def followed_by?(user)
+    passive_relationships.find_by(following_id: user.id).present?
+  end  
+
+  # 検索のために定義
+  de
+  
 end

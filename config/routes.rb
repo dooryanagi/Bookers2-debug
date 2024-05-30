@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     get :followers, on: :member
   end
 
+  # 検索機能の追加のために追加定義
+  get "/search" => "searchs#search"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
