@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  
+
   # bookモデルはuserに属する
   belongs_to :user
   # bookはたくさんのいいねを持つ
@@ -12,7 +12,7 @@ class Book < ApplicationRecord
   # カンマの後のスペースはどっちでもいい？
   validates :title, presence:true
   validates :body, presence:true, length:{maximum:200}
-  
+
   # いいねの表示をすでにいいねをしたか否かで変更するためのメソッド定義
   # これを使うのはbookのビュー内なので、Bookモデルに定義
   def favorited_by?(user)
@@ -23,16 +23,16 @@ class Book < ApplicationRecord
   def self.search_for(content, method)
     if method == 'perfect'
       # 完全一致
-      Book.where(name: content)
+      Book.where(title: content)
     elsif method == 'forward'
       # 前方一致
-      Book.where('name LIKE ?',content + '%' )
+      Book.where('title LIKE ?',content + '%' )
     elsif method == 'backward'
       # 後方一致
-      Book.where('name LIKE ?','%' + content )
+      Book.where('title LIKE ?','%' + content )
     else
       # 部分一致
-      Book.where('name LIKE ?','%' + content + '%' )
+      Book.where('title LIKE ?','%' + content + '%' )
     end
   end
 
