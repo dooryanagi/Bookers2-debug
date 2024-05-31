@@ -1,0 +1,11 @@
+<!--検索対象によって表示を変える-->
+<% if @model == 'user' %>
+  <h3>Users search for "<%= @content %>"</h3>
+  <!--user一覧表示用の部分テンプレートに検索結果が代入されているインスタンス変数@recordを代入する-->
+  <%= render 'users/index' users:@records %>
+
+<% else %>
+  <h3>Books search for "<%= @content %>"</h3>
+  <!--book一覧表示用の部分テンプレートに検索結果が代入されているインスタンス変数@recordを代入する-->
+  <%= render 'books/index' books:@records %>
+<% end %>

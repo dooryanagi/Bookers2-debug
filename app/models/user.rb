@@ -45,6 +45,20 @@ class User < ApplicationRecord
   end  
 
   # 検索のために定義
-  de
+  def self.search_for(content, method)
+    if method == 'perfect'
+      # 完全一致
+      User.where(name: content)
+    elsif method == 'forward'
+      # 前方一致
+      User.where('name LIKE ?',content + '%' )
+    elsif method == 'backward'
+      # 後方一致
+      User.where('name LIKE ?','%' + content )
+    else
+      # 部分一致
+      User.where('name LIKE ?','%' + content + '%' )
+    end
+  end
   
 end
