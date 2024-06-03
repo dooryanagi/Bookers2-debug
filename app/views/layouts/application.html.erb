@@ -24,8 +24,9 @@
         <!--検索ボックスの呼び出し、変数がないので定義の必要なし-->
         <div>
           <!--ルートパスには表示させたくない-->
-          <!--userの編集ページも表示させたくない-->
-          <% unless current_page?(root_path)||current_page?(edit_user_path(current_user)) %>
+          <!--userの編集ページも表示させたくない→ログイン前だとエラーが出てしまう→今後勉強しよう、、、-->
+          <% unless current_page?(root_path) %>
+          <!--記載をやめたコード：||current_page?(edit_user_path(current_user.id))-->
             <%= render 'searchs/search' %>
           <% end %>
         </div>
