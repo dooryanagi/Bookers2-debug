@@ -1,0 +1,11 @@
+<!--@book→book、@comment→comment-->
+<!--モデルはbookに紐づいたコメントであるため両方指定する必要あり-->
+<%= form_with model:[book, comment], local: false do |f| %>
+<div class="form-group">
+<!--中でclassを指定するときは＝ではなく：で指定する-->
+  <%= f.text_area :comment, row:'3', class: "form-control", placeholder: "Comment here!", id: "comment_textarea" %>
+</div>
+<div class="form-group">
+  <%= f.submit "Submit", class: "btn btn-success" %>
+</div>
+<% end %>

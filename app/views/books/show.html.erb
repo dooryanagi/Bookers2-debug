@@ -46,47 +46,22 @@
 
           </td>
           <!--コメント数の追加-->
-          <!---->
-          <td>
-            <%= @book.book_comments.count %>コメント
+          <!--コメントの非同期通信化-->
+          <td id="comment_counter">
+            <%= render 'book_comments/counter', book: @book %>
           </td>
         </tr>
       </table>
 
-      <!--投稿されたコメントの表示-->
-      <% @book.book_comments.each do |comment| %>
-      <table class="table">
-        <tr>
-          <td>
-            <%= image_tag comment.user.get_profile_image, size:"50x50" %></br>
-            <%= comment.user.name %>
-          </td>
-          <td>
-            <%= comment.comment %>
-          </td>
-          <td>
-            <!--本人の場合のみ削除ボタンが表示されるよう設定-->
-            <% if comment.user == current_user %>
-            <!--パスに引数を指定して本とコメントの両方を特定する必要がある-->
-            <%= link_to "Destroy", book_book_comment_path(comment.book, comment), method: :delete, class: "btn btn-danger" %>
-            <% end %>
-          </td>
-        </tr>
-      </table>
-      <% end %>
-
+      <div id="comment_index">
+        <!--投稿されたコメントの表示-->
+        <!--コメントの非同期通信化-->
+        <%= render 'book_comments/index', book: @book %>
+      </div>
 
       <!--コメント投稿欄の追加-->
-      <!--モデルはbookに紐づいたコメントであるため両方指定する必要あり-->
-        <%= form_with model:[@book, @comment] do |f| %>
-        <div class="form-group">
-          <!--中でclassを指定するときは＝ではなく：で指定する-->
-          <%= f.text_area :comment, row:'3', class: "form-control", placeholder: "Comment here!" %>
-        </div>
-        <div class="form-group">
-          <%= f.submit "Submit", class: "btn btn-success" %>
-        </div>
-        <% end %>
+      <!--コメントの非同期通信化-->
+        <%= render 'book_comments/form', book: @book, comment: @comment %>
 
     </div>
   </div>
