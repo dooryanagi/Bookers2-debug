@@ -10,11 +10,20 @@
 
     <!--自身のKitを張りなおす-->
     <script src="https://kit.fontawesome.com/7ae0cf8aaf.js" crossorigin="anonymous"></script>
+    <!--turbolinkにまつわるエラーの原因探し-->
+      <!--document.addEventListener("turbolinks:load",function(){-->
+        <!--Turbolinks.clearCache();-->
+      <!--});-->
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <!--★でのランク付けのためにRatyをインストールし、記述を追加-->
-    <script src="jquery.min.js"></script>
-    <script src="jquery.raty.js"></script>
+    <!--参照記事変更、コメントアウト-->
+    <!--<script src="jquery.min.js"></script>-->
+    <!--<script src="jquery.raty.js"></script>-->
+    <!--raty.jsを読み込む-->
+
   </head>
 
   <body>

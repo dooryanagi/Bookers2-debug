@@ -70,6 +70,7 @@ class BooksController < ApplicationController
 
   def book_params
     # permitにbodyも追加
-    params.require(:book).permit(:title, :body)
+    # ★評価のために:starカラムを追加
+    params.require(:book).permit(:title, :body, :star)
   end
 end

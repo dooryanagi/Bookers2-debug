@@ -24,3 +24,14 @@ window.raty = function(elem,opt){
   raty.init();
   return raty;
 }
+
+// javascriptを読み込むための記述を追加
+// 参照記事変更のため、コメントアウト
+  // require jquery.min;
+  // require jquery.raty;
+
+// ★評価のために追記
+// jqueryの呼び出し
+// window.$ = window.jQuery = require('jquery');
+
+// エラーへの対応のためturbolinkを無効化（参照記事にあるものもあった、、、）

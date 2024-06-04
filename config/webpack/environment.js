@@ -6,7 +6,9 @@ environment.plugins.prepend(
   new webpack.ProvidePlugin({
     $: 'jquery/src/jquery',
     jQuery: 'jquery/src/jquery',
-    Popper: 'popper.js'
+    // ★評価のために追記
+    jquery: 'jquery/src/jquery',
+    Popper: 'popper.js',
   })
 )
 

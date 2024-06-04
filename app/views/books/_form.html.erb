@@ -12,6 +12,28 @@
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
 
+  <!--★評価を追加-->
+  <div class="form-group">
+    <div id="stars"></div>
+
+  <script>
+    // エラー回避のためキャッシュクリアを追加
+    document.addEventListener("turbolinks:load",function(){
+      // 星が増えてしまうエラー回避
+      $('#stars').empty();
+      let elem = document.querySelector('#stars');
+      let opt = {
+        // number:3,
+        scoreName:'book[star]',
+        starOn:"<%= asset_path('star-on.png') %>",
+        starOff:"<%= asset_path('star-off.png') %>",
+        };
+        window.raty(elem, opt);
+    });
+  </script>
+
+  </div>
+
   <div class="form-group">
     <!--デフォ→'CreateBook'-->
     <!--こうするとeditのページでもcreatbookになってしまう、、、ifか？？-->

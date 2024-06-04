@@ -58,3 +58,6 @@ gem 'devise'
 
 # ratyをインストールする
 gem 'rating'
+
+# ここでもjqueryをインストール、正解がわからない、、、
+gem 'jquery-rails'

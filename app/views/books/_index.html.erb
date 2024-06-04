@@ -19,6 +19,28 @@
         <!--urlは_pathで表記-->
         <td><%= link_to book.title, book_path(book.id) %></td>
         <td><%= book.body %></td>
+
+        <!--星の評価を表示-->
+        <!--idに本のid情報を入れることでそれぞれの情報を取り出すことができる-->
+        <td id="show-index-stars-<%= book.id %>"></td>
+        <script>
+          document.addEventListener("turbolinks:load",function(){
+            // 星が増えてしまうエラー回避
+            $('#show-index-stars-<%= book.id %>').empty();
+              let showindexRateElement = document.querySelector('#show-index-stars-<%= book.id %>');
+              let showindexOpt = {
+                // number:3,
+                scoreName:'book[star]',
+                starOn:"<%= asset_path('star-on.png') %>",
+                starOff:"<%= asset_path('star-off.png') %>",
+                readOnly: true,
+                //
+                score: "<%= book.star %>",
+            };
+            window.raty(showindexRateElement, showindexOpt);
+          });
+        </script>
+
         <!--いいねボタンの追加-->
         <!--いいねしているかの分岐を追加-->
         <!--destroyになってしまう？？-->

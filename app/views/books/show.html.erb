@@ -30,6 +30,26 @@
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
 
+          <!--★評価の追加-->
+          <td id="show-stars"></td>
+          <script>
+            // エラー回避のためキャッシュクリアを追加
+            document.addEventListener("turbolinks:load",function(){
+              // 星が増えてしまうエラー
+              $('#show-stars').empty();
+              let showRateElement = document.querySelector('#show-stars');
+              let showOpt = {
+                // number:3,
+                scoreName:'book[star]',
+                starOn:"<%= asset_path('star-on.png') %>",
+                starOff:"<%= asset_path('star-off.png') %>",
+                readOnly: true,
+                score: "<%= @book.star %>",
+              };
+              window.raty(showRateElement, showOpt);
+            });
+          </script>
+
             <!--本人以外はボタンが表示されないようにする-->
           <% if @user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
