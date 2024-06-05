@@ -17,7 +17,13 @@
 
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
-      <!--スペースの追加-->
+
+        <!--並び替えリンクの挿入-->
+        <div>
+          <%= link_to '新しい順', books_path(latest: "true") %>
+          |<%= link_to '評価の高い順', books_path(star_count: "true") %>
+        </div>
+
       <%= render 'index', books: @books %>
     </div>
   </div>

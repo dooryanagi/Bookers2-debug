@@ -36,4 +36,8 @@ class Book < ApplicationRecord
     end
   end
 
+# 並び替えのために定義
+  scope :latest, -> {order(created_at: :desc)}
+  scope :star_count, -> {order(star: :desc)}
+
 end

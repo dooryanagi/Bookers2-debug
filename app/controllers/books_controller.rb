@@ -12,7 +12,16 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    # 並び替えのためにURLで指定された順番に並び替える
+    if params[:latest]
+      # モデルで定義した並び順で指定
+      @books = Book.latest
+    elsif params[:star_count]
+      @books = Book.star_count
+    else
+      @books = Book.all
+    end
+
     # 部分テンプレート（userinfo）呼び出しのために定義
     # アソシエーションにより、これで定義できるのではなかったっけ？
     # Book.allだから@book.userでは一つに絞ることは出来ない
@@ -71,6 +80,7 @@ class BooksController < ApplicationController
   def book_params
     # permitにbodyも追加
     # ★評価のために:starカラムを追加
-    params.require(:book).permit(:title, :body, :star)
+    # タグの追加のために:tagカラムを追加
+    params.require(:book).permit(:title, :body, :star, :tag)
   end
 end

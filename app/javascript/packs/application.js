@@ -34,4 +34,3 @@ window.raty = function(elem,opt){
 // jqueryの呼び出し
 // window.$ = window.jQuery = require('jquery');
 
-// エラーへの対応のためturbolinkを無効化（参照記事にあるものもあった、、、）
