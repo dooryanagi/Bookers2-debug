@@ -40,6 +40,7 @@ class Book < ApplicationRecord
   end
 
   # tag検索のために定義
+  # モデルを絡める必要がないから、コントローラーで定義すればよかったか？
   def self.tag_search_for(tag)
     Book.where(tag: tag)
   end
