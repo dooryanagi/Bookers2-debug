@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   # 検索機能の追加のために追加定義
   get "/search" => "searchs#search"
+  # タグ検索の機能追加
+  get "/tag_search" => "searchs#tag_search"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

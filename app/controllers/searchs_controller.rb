@@ -15,4 +15,10 @@ class SearchsController < ApplicationController
     end
   end
   
+  # tag検索のために定義
+  def tag_search
+    @tag = params[:tag]
+    @tag_records = Book.tag_search_for(@tag)
+  end
+  
 end

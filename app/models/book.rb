@@ -12,6 +12,9 @@ class Book < ApplicationRecord
   # カンマの後のスペースはどっちでもいい？
   validates :title, presence:true
   validates :body, presence:true, length:{maximum:200}
+  # tagも必須にする
+  validates :tag, presence:true, length:{maximum:20}
+
 
   # いいねの表示をすでにいいねをしたか否かで変更するためのメソッド定義
   # これを使うのはbookのビュー内なので、Bookモデルに定義
@@ -34,6 +37,11 @@ class Book < ApplicationRecord
       # 部分一致
       Book.where('title LIKE ?','%' + content + '%' )
     end
+  end
+
+  # tag検索のために定義
+  def self.tag_search_for(tag)
+    Book.where(tag: tag)
   end
 
 # 並び替えのために定義

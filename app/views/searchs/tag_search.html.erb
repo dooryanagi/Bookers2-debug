@@ -1,0 +1,3 @@
+  <h3>Books search for "<%= @tag %>"</h3>
+  <!--user一覧表示用の部分テンプレートに検索結果が代入されているインスタンス変数@recordを代入する-->
+  <%= render 'books/index', books:@tag_records %>
