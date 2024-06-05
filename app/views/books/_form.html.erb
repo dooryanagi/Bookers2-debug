@@ -12,6 +12,12 @@
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
 
+  <!--tagの入力を追加-->
+  <div class="form-group">
+    <%= f.label :tag %>
+    <%= f.text_field :tag, class: 'form-control book_title' %>
+  </div>
+
   <!--★評価を追加-->
   <div class="form-group">
     <div id="stars"></div>
