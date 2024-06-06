@@ -13,6 +13,9 @@ class User < ApplicationRecord
   # userはたくさんのコメントを持っている
   # userが消えたらコメントにも消えてもらう
   has_many :book_comments, dependent: :destroy
+  # userはたくさんのgroupuserになりうる
+  has_many :group_users, dependent: :destroy
+  
 
   # ★フォローする側：フォローする人はたくさんのフォローされる人を持っている
   # userはたくさんのfollowerを持っている
