@@ -18,6 +18,15 @@
     <div class='col-md-8 offset-md-1'>
   		<h2>Group Detail</h2>
   		<table class='table'>
+  		  <thead>
+  		    <tr>
+            <th colspan="1"></th>
+            <th>グループ名</th>
+            <th>紹介文</th>
+            <th>メンバー</th>
+            <th colspan="1"></th>
+          </tr>
+  		  </thead>
   		  <tr>
           <td>
             <%= image_tag @group.get_group_image, size:"50x50" %>
@@ -28,10 +37,27 @@
           <td>
             <%= @group.introduction %>
           </td>
+          <td>
+            <% @group.group_users.each do |group_user| %>
+              <!--ほしいデータを持っている人が先頭に来る、この場合はuserのnameが欲しいから、Userが先頭-->
+              <%= User.find(group_user.user_id).name %><br>
+            <% end %>
+          </td>
 
+          <td>
+          <!--ownerは編集できる-->
           <% if @group.owner_id == current_user.id %>
-            <td><%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %></td>
+            <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
+          <!--参加してる場合はLeaveできる-->
+          <% elsif @group.joined_by?(current_user) %>
+            <%= link_to 'Leave', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
+          <!--参加済みでもownerでもなければJoin-->
+          <% else %>
+            <%=link_to 'Join', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-success" %>
           <% end %>
+
+
+          </td>
         </tr>
       </table>
     </div>

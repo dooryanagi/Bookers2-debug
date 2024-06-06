@@ -34,7 +34,9 @@ Rails.application.routes.draw do
   get "/tag_search" => "searchs#tag_search"
 
   # グループ機能の追加
-  resources :groups, only: [:new, :edit, :index, :show, :create, :update]
+  resources :groups, only: [:new, :edit, :index, :show, :create, :update] do
+    resource :group_users, only: [:create, :destroy]
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
