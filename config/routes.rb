@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #ログインに関わるので最初に持ってくる
@@ -31,6 +32,9 @@ Rails.application.routes.draw do
   get "/search" => "searchs#search"
   # タグ検索の機能追加
   get "/tag_search" => "searchs#tag_search"
+
+  # グループ機能の追加
+  resources :groups, only: [:new, :edit, :index, :show, :create, :update]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

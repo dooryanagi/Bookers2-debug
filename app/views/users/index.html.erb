@@ -15,6 +15,11 @@
 
     <div class='col-md-8 offset-md-1'>
       <h2>Users</h2>
+
+      <!--グループへのリンクを作成-->
+      <%= link_to "グループを作成する", new_group_path %>
+      |<%= link_to "グループ一覧", groups_path %>
+
       <!--ユーザー一覧の呼び出し-->
       <!--showリンクが変なので追記-->
       <%= render partial: 'index', locals:{ users: @users} %>
