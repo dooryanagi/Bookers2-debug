@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'events/new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #ログインに関わるので最初に持ってくる
@@ -35,7 +36,10 @@ Rails.application.routes.draw do
 
   # グループ機能の追加
   resources :groups, only: [:new, :edit, :index, :show, :create, :update] do
+    # 間違ったここはgroup_userが良かった！
     resource :group_users, only: [:create, :destroy]
+    # eventの追加
+    resources :events, only: [:new, :create]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -5,6 +5,9 @@ class Group < ApplicationRecord
 
   # グループはたくさんのグループユーザがいる、グループがなくなったらグループユーザーもなくなる
   has_many :group_users, dependent: :destroy
+  
+  # グループはたくさんのイベントを持っている、グループがなくなったらイベントもなくなる
+  has_many :events, dependent: :destroy
 
   # 作成時のバリデーション
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true

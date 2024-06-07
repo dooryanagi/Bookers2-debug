@@ -80,20 +80,20 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # gmailを使用してメールを送るためのサーバーについて設定
-  cinfig.action_mailer.smtp_settings = {
+  config.action_mailer.smtp_settings = {
     # smtp = Simple Mail Transfer Protocol
     address:           'smtp.gmail.com',
     port:             587,
     # いつまでexample??→実際に使用したいものを記述する
     domain:           'gmail.com',
     # この情報を守りたい
-    user_name:        ENV['SECRET_name'],
+    user_name:         ENV['SECRET_name'],
     # この情報を守りたい
-    password:        ENV['SECRET_password'],
+    password:          ENV['SECRET_password'],
     authentication:   'plain',
     enable_starttls:  true,
     open_timeout:     5,
     read_timeout:     5
   }
-  
+
 end

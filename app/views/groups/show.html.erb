@@ -40,6 +40,7 @@
           <td>
             <% @group.group_users.each do |group_user| %>
               <!--ほしいデータを持っている人が先頭に来る、この場合はuserのnameが欲しいから、Userが先頭-->
+              <!--findのなかにuser_idいる-->
               <%= User.find(group_user.user_id).name %><br>
             <% end %>
           </td>
@@ -55,9 +56,15 @@
           <% else %>
             <%=link_to 'Join', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-success" %>
           <% end %>
-
-
           </td>
+
+          <td>
+          <!--ownerはイベントを開催できる-->
+          <% if @group.owner_id == current_user.id %>
+            <%= link_to 'Nitice an Event', new_group_event_path(@group), class: "btn btn-sm btn-info" %>
+          <% end %>
+          </td>
+
         </tr>
       </table>
     </div>
