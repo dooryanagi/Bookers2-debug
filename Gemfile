@@ -56,8 +56,11 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
-# ratyをインストールする
+# ratyをインストールする→これはきっと誤り
 gem 'rating'
 
 # ここでもjqueryをインストール、正解がわからない、、、
 gem 'jquery-rails'
+
+# 環境変数を管理するためのgem
+gem 'dotenv-rails'
