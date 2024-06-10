@@ -1,22 +1,39 @@
 class EventsController < ApplicationController
   def new
+    # からのイベントを作成する前に、親となるグループを探してくる必要がある
+    # form_withのためにnewでも定義
     @event = Event.new
+    @group = Group.find(params[:group_id])
   end
 
   def create
     # もととなるgroup情報（group_id)を取得
     @group = Group.find(params[:group_id])
     @event = Event.new(event_params)
-    # groupと関連付ける
-    @event.group_id = @group.id
-    # メールを送るためにuserを定義
-    @user = User.group_users
     @event.save
-    # ここにメール送信機能を追加
-    EventMailer.send_when_reply(@user, @event).deliver
-    # 送信完了画面も併せて作成したい
-    redirect_to groups_path
+    # URLから必要情報をそれぞれ取得
+    @title = params[:title]
+    @contents = params[:contents]
+
+    # イベントの詳細情報を格納するハッシュを作成
+    event = {
+      :group => @group,
+      :title => @title,
+      :contents => @contents
+    }
+
+    EventMailer.send_email_holding_events_to_group(@group, event)
+    render :sent
   end
+
+  # 送信完了画面
+  def sent
+    @event = Event.find(params[:group_id])
+    # ここにビュー用の変数定義は不要？？なぜ？
+    # なんでredirect_toがいるんだろう？
+    redirect_to group_path(params[group_id])
+  end
+
 
   private
 

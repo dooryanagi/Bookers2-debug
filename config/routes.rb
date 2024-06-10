@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'events/new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #ログインに関わるので最初に持ってくる
@@ -40,6 +39,9 @@ Rails.application.routes.draw do
     resource :group_users, only: [:create, :destroy]
     # eventの追加
     resources :events, only: [:new, :create]
+    # sentは自分で定義したアクションだからonlyオプションでは使えない
+    get "/events/sent" => "events#sent"
+    
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
