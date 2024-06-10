@@ -1,5 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
-  # サンプルアドレスでも最初は
-  default from: 'from@example.com'
+  # サンプルアドレスでも最初はOK
+  default from: "グループオーナー　<owner@example.com>"
   layout 'mailer'
 end
+
+

@@ -9,8 +9,11 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     # groupと関連付ける
     @event.group_id = @group.id
+    # メールを送るためにuserを定義
+    @user = User.group_users
     @event.save
     # ここにメール送信機能を追加
+    EventMailer.send_when_reply(@user, @event).deliver
     # 送信完了画面も併せて作成したい
     redirect_to groups_path
   end
