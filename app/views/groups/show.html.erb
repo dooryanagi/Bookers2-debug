@@ -61,7 +61,8 @@
           <td>
           <!--ownerはイベントを開催できる-->
           <% if @group.owner_id == current_user.id %>
-            <%= link_to 'Nitice an Event', new_group_event_path(@group), class: "btn btn-sm btn-info" %>
+            <!--追加ボタンの練習-->
+            <%= link_to '＋', new_group_event_path(@group), class: "btn btn-lg btn-info rounded-circle p-0", style: "width:2rem;height:2rem;" %>
           <% end %>
           </td>
 
