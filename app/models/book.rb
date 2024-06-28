@@ -45,6 +45,25 @@ class Book < ApplicationRecord
     Book.where(tag: tag)
   end
 
+  # 投稿数カウントのメソッド（引数に開始日と終わり日を渡す）
+  def self.number_of_book(start_date, end_date)
+    start_of_day = start_date.beginning_of_day
+    end_of_day = end_date.end_of_day
+    Book.where(created_at: start_of_day..end_of_day).count
+  end
+
+  # 指定した日同士の投稿冊数割合の算出
+  def self.percentage_of_books(start_term_1, end_term_1, start_term_2, end_term_2)
+    number_of_divide = Book.number_of_book(start_term_1, end_term_1)
+    number_of_dividend = Book.number_of_book(start_term_2, end_term_2)
+    if number_of_divide == 0
+      return 0
+    else
+      ratio = number_of_dividend / number_of_divide * 100
+      return ratio
+    end
+  end
+
 # 並び替えのために定義
   scope :latest, -> {order(created_at: :desc)}
   scope :star_count, -> {order(star: :desc)}

@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+    @start_last_month = START_LAST_MONTH
+    @end_last_month = END_LAST_MONTH
+    @start_two_month_ago = START_TWO_MONTH_AGO
+    @end_two_month_ago = END_TWO_MONTH_AGO
   end
 
   def index

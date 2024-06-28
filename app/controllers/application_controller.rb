@@ -20,4 +20,16 @@ class ApplicationController < ActionController::Base
     # サインアップ、サインインの両方をnameに
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
   end
+  
+  # 先月
+  # 先月の開始
+  START_LAST_MONTH = 30.days.ago.to_date
+  # 先月の終わり
+  END_LAST_MONTH = Date.yesterday
+  # 先々月
+  # 先々月の開始
+  START_TWO_MONTH_AGO = 61.days.ago.to_date
+  # 先々月の終わり
+  END_TWO_MONTH_AGO = 31.days.ago.to_date
+  
 end
