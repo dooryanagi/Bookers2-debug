@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   #ログインに関わるので最初に持ってくる
   devise_for :users
 
+  # ゲストログイン用のルーティング
+  devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
+
   # root toの書き方の修正
   root to: 'homes#top'
   get "home/about"=>"homes#about"

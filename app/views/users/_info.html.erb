@@ -28,17 +28,22 @@
 
 </table>
 
-<div class='row'>
-  <!--本人の場合、編集リンク、本人以外の場合、フォローのリンク-->
-  <% if user == current_user %>
-    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
-      <i class="fas fa-user-cog"></i>
-    <% end %>
-  <% else %>
-    <% if user.followed_by?(current_user) %>
-      <%= link_to "フォローを外す", user_relationship_path(user.id), method: :delete, class: "btn btn-block btn-danger" %>
+<!--ゲストユーザは編集ボタンが現れない-->
+<!--定数の方は使えない？？-->
+<!--退避と交換（インスタンス係数を介して、ビューで使える形に変更する必要がある）-->
+<% unless user.guest_user? %>
+  <div class='row'>
+    <!--本人の場合、編集リンク、本人以外の場合、フォローのリンク-->
+    <% if user == current_user %>
+      <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
     <% else %>
-      <%= link_to "フォローする", user_relationship_path(user.id), method: :post, class: "btn btn-block btn-success" %>
+      <% if user.followed_by?(current_user) %>
+        <%= link_to "フォローを外す", user_relationship_path(user.id), method: :delete, class: "btn btn-block btn-danger" %>
+      <% else %>
+        <%= link_to "フォローする", user_relationship_path(user.id), method: :post, class: "btn btn-block btn-success" %>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>

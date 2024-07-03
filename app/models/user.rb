@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   # userはたくさんのgroupuserになりうる
   has_many :group_users, dependent: :destroy
-  
+
 
   # ★フォローする側：フォローする人はたくさんのフォローされる人を持っている
   # userはたくさんのfollowerを持っている
@@ -41,11 +41,11 @@ class User < ApplicationRecord
     # サイズの引数をどこでも指定できる[width,height]を引数にすることもできるし、今回のように各箇所で大きさを指定することもできる
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
-  
+
   # 自分のことはフォローできないようにメソッドを定義
   def followed_by?(user)
     passive_relationships.find_by(following_id: user.id).present?
-  end  
+  end
 
   # 検索のために定義
   def self.search_for(content, method)
@@ -63,8 +63,25 @@ class User < ApplicationRecord
       User.where('name LIKE ?','%' + content + '%' )
     end
   end
-  
 
-  
-  
+  # ゲストログイン機能に関わるメソッド定義
+  # 定数？の定義はモデル内にも可能
+  GUEST_USER_EMAIL = "guest@example.com"
+
+  # userというローカル変数にログインに必要な情報を持たせるためのメソッド
+  def self.guest
+    # データの検索と作成を自動的に判断して処理を行う
+    # （）内の条件が存在すればそのデータを（email）、なければ新規作成する
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      # 適当にランダムなパスワードを作成してくれる
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
+
+  # trueかfalseを返す
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+
 end

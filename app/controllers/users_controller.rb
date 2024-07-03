@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:update]
+  before_action :ensure_guest_user, only: [:edit]
+
 
   def show
     @user = User.find(params[:id])
@@ -69,4 +71,16 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
+  # ゲストログインの場合、editができないように
+  def ensure_guest_user
+    # ゲストユーザも都度idが付与され、Userテーブルにデータとして蓄積される→idを持つ＝params[:id]で探すことができる
+    @user = User.find(params[:id])
+    if @user.guest_user?
+      redirect_to user_path(current_user),notice: "ゲストユーザはプロフィール編集画面へ遷移は出来ません"
+    end
+  end
+
+
+
 end
