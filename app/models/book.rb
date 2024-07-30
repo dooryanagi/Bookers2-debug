@@ -5,9 +5,12 @@ class Book < ApplicationRecord
   # bookはたくさんのいいねを持つ
   # bookが消えたらいいねも消えてもらう
   has_many :favorites, dependent: :destroy
+  # favoriteを通じてuser情報を取得する
+  has_many :favorited_users, through: :favorites, source: :user
   # bookはたくさんのコメントを持つ
   # bookが消えたらコメントも消えてもらう
   has_many :book_comments, dependent: :destroy
+
 
   # カンマの後のスペースはどっちでもいい？
   validates :title, presence:true
@@ -62,6 +65,13 @@ class Book < ApplicationRecord
       ratio = number_of_dividend / number_of_divide * 100
       return ratio
     end
+  end
+
+  # 過去１週間のいいね数で並び替え
+  def self.weekly_favorites
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    Book.includes(:favorited_users).sort_by {|x| x.favorited_users.includes(:favorites).where(created_at: from...to).size}.reverse
   end
 
 # 並び替えのために定義

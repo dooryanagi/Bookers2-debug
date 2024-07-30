@@ -19,7 +19,8 @@ class BooksController < ApplicationController
     elsif params[:star_count]
       @books = Book.star_count
     else
-      @books = Book.all
+      # @books = Book.all
+      @books = Book.weekly_favorites
     end
 
     # 部分テンプレート（userinfo）呼び出しのために定義
