@@ -9,6 +9,8 @@ class BooksController < ApplicationController
     @user = @book.user
     # コメントを投稿するための変数を定義
     @comment = BookComment.new
+    # 閲覧数のカウント
+    current_user.view_counts.where(created_at: Time.zone.now.all_day).find_or_create_by(book_id: @book.id)
   end
 
   def index

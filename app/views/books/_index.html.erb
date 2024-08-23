@@ -6,7 +6,10 @@
       <!--colspanをするのはまとめるセルの中では？、、、-->
       <th>Opinion</th>
       <th>Tag</th>
-      <th colspan="2"></th>
+      <th>Review</th>
+      <th>Like</th>
+      <th>Comment</th>
+      <th>ViewCount</th>
     </tr>
   </thead>
   <tbody>
@@ -61,6 +64,9 @@
         <!--コメント数の追加-->
         <td>
           <%= book.book_comments.count %>コメント
+        </td>
+        <td>
+          閲覧数：<%= book.view_counts.count %>
         </td>
       </tr>
     <% end %>

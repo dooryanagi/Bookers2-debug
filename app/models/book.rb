@@ -10,6 +10,9 @@ class Book < ApplicationRecord
   # bookはたくさんのコメントを持つ
   # bookが消えたらコメントも消えてもらう
   has_many :book_comments, dependent: :destroy
+  # カウント機能
+  has_many :view_counts, dependent: :destroy
+
 
 
   # カンマの後のスペースはどっちでもいい？
