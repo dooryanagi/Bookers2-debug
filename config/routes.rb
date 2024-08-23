@@ -46,8 +46,13 @@ Rails.application.routes.draw do
     resources :events, only: [:new, :create]
     # sentは自分で定義したアクションだからonlyオプションでは使えない
     get "/events/sent" => "events#sent"
-    
+
   end
+
+# DM機能
+resources :rooms, only: [:create,:show] do
+  resources :messages, only: [:create]
+end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

@@ -11,6 +11,21 @@ class UsersController < ApplicationController
     @end_last_month = END_LAST_MONTH
     @start_two_month_ago = START_TWO_MONTH_AGO
     @end_two_month_ago = END_TWO_MONTH_AGO
+
+    @current_entry = Entry.where(user_id: current_user.id)
+    @another_entry = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      # pluckでroom_idの配列にする ＋ ＆で共通要素を探す
+      @room = Room.find(@current_entry.pluck(:room_id) & @another_entry.pluck(:room_id))
+      # @is_roomを定義しなくても、↓のif文で分岐
+      if @room.present?
+        @is_room = true
+      else
+        @is_room = false
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def index

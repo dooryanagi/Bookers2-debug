@@ -1,0 +1,13 @@
+<!--本人以外のuser詳細ページかつ相互にフォローしている場合-->
+<% if user != current_user && current_user.followed_by?(user) && user.followed_by?(current_user) %>
+  <!--既にルームがあればその部屋へ-->
+  <% if is_room %>
+    <%= link_to "チャットルームへ", room_path(room) %>
+  <!--部屋が無ければ新たに作成する-->
+  <% else %>
+    <%= form_with url: rooms_path, method: :post do |f| %>
+      <%= f.hidden_field :user_id, value: user.id %>
+      <%= f.submit "チャットを開始する" %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -30,7 +30,9 @@ class User < ApplicationRecord
   # フォローされている人一覧の作成の準備
   has_many :followers, through: :passive_relationships, source: :following
   
-  
+  # DM機能
+  has_many :messages,  dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   has_one_attached :profile_image
 

@@ -4,6 +4,9 @@
     <div class='col-md-3'>
       <h2>User info</h2>
       <%= render 'info', user: @user %>
+
+      <%= render 'chat', user: @user, room: @room, is_room: @is_room %>
+
       <h2 class="mt-3">New book</h2>
       <%= render 'books/form', book: @book %>
     </div>
@@ -12,23 +15,25 @@
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
 
-      <!--今日投稿した本の冊数を表示させる-->
-      今日 <%= @books.number_of_book(Date.today, Date.today) %> 冊、読みました。素敵です！<br>
-      昨日 <%= @books.number_of_book(Date.yesterday, Date.yesterday) %> 冊、読みました。いい本でしたね。<br>
+      <% if @user == current_user %>
+        <!--今日投稿した本の冊数を表示させる-->
+        今日 <%= @books.number_of_book(Date.today, Date.today) %> 冊、読みました。素敵です！<br>
+        昨日 <%= @books.number_of_book(Date.yesterday, Date.yesterday) %> 冊、読みました。いい本でしたね。<br>
 
-      <% if @books.percentage_of_books(Date.yesterday, Date.yesterday, Date.today ,Date.today) == 0 %>
-        <p>昨日は本を読んでいません。今日はたくさん読めるといいですね！</p>
-      <% else %>
-        <p>前日比は <%= @books.percentage_of_books(Date.yesterday, Date.yesterday, Date.today ,Date.today)%> %　でした。</p>
-      <% end %>
+        <% if @books.percentage_of_books(Date.yesterday, Date.yesterday, Date.today ,Date.today) == 0 %>
+          <p>昨日は本を読んでいません。今日はたくさん読めるといいですね！</p>
+        <% else %>
+          <p>前日比は <%= @books.percentage_of_books(Date.yesterday, Date.yesterday, Date.today ,Date.today)%> %　でした。</p>
+        <% end %>
 
-      <!--先月読んだ本を表示させる-->
-      先月（<%= @start_last_month.strftime("%Y/%m/%d") %>　～ <%= @end_last_month.strftime("%Y/%m/%d") %>）は　<%= @books.number_of_book(@start_last_month, @end_last_month) %>冊読みました。<br>
-      <!--先々月読んだ本を表示させる-->
-      先々月（<%= @start_two_month_ago.strftime("%Y/%m/%d") %>　～ <%= @end_two_month_ago.strftime("%Y/%m/%d") %>）は　<%= @books.number_of_book(@start_two_month_ago, @end_two_month_ago) %>冊読みました。<br>
+        <!--先月読んだ本を表示させる-->
+        先月（<%= @start_last_month.strftime("%Y/%m/%d") %>　～ <%= @end_last_month.strftime("%Y/%m/%d") %>）は　<%= @books.number_of_book(@start_last_month, @end_last_month) %>冊読みました。<br>
+        <!--先々月読んだ本を表示させる-->
+        先々月（<%= @start_two_month_ago.strftime("%Y/%m/%d") %>　～ <%= @end_two_month_ago.strftime("%Y/%m/%d") %>）は　<%= @books.number_of_book(@start_two_month_ago, @end_two_month_ago) %>冊読みました。<br>
 
-      <% unless @books.percentage_of_books(@start_last_month, @end_last_month, @start_two_month_ago ,@end_two_month_ago) == 0%>
-              先月読んだ冊数の先々月比は<%= @books.percentage_of_books(@start_last_month, @end_last_month, @start_two_month_ago ,@end_two_month_ago) %>です。
+        <% unless @books.percentage_of_books(@start_last_month, @end_last_month, @start_two_month_ago ,@end_two_month_ago) == 0%>
+                先月読んだ冊数の先々月比は<%= @books.percentage_of_books(@start_last_month, @end_last_month, @start_two_month_ago ,@end_two_month_ago) %>です。
+        <% end %>
       <% end %>
     </div>
 
